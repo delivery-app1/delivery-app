@@ -1,5 +1,6 @@
 import React from 'react';
 import Ticket from './ticket';
+import FormModal from './modal';
 import './admin.css';
 import io from 'socket.io-client';
 const socket = io('localhost:5000/', { transports: ['websocket'] });
@@ -10,6 +11,9 @@ class Admin extends React.Component {
       staffName: '',
       tickets: [],
       onlineStaff: [],
+      showModal:false,
+      done:0,
+      price: 0,      
     };
   }
   componentDidMount() {
@@ -34,14 +38,47 @@ class Admin extends React.Component {
       });
     });
   }
+  handleShowModal=()=> {
+    this.setState({
+      showModal:true
+    })
+  }
+  handleCloseModal=()=> {
+    this.setState({
+      showModal:false,
+    })
+  }
+  updateTime=(event)=>{
+    this.setState({
+      done: event.target.value,
+    })
+  }
+  updatePrice=(event)=>{
+    this.setState({
+      price: event.target.value
+    })
+    console.log('price from modal');
+  }
+  answareOrder = async (event) =>{
+    event.preventDefault();
+    const orderFormData = {
+      done: this.state.done,
+      price: this.state.price,
+    }
+    console.log(orderFormData)
+  }
   handleClaim = (id, socketId) => {
     console.log(socketId);
+    this.setState({
+     showModal: true
+    });
+    console.log('ticket',this.state.staffName)
     this.props.socket.emit('claim', {
       id,
       name: this.state.staffName,
       studentId: socketId,
     });
-  
+    
   };
   render() {
     return (
@@ -51,7 +88,10 @@ class Admin extends React.Component {
         <section id="tickets">
           {this.state.tickets.map((ticket) => {
             return (
-              <Ticket {...ticket} handleClaim={this.handleClaim} key={ticket.id} />
+  <>
+              <Ticket {...ticket} handleClaim={this.handleClaim} key={ticket.id} showModal={this.state.showModal} />
+              {this.state.showModal &&  <FormModal  closeModalFx={this.handleCloseModal} showModal={this.state.showModal} updateTime={this.updateTime} updatePrice={this.updatePrice} answareOrder={this.answareOrder} done={this.done} price={this.price}/>}
+              </>
             );
           })}
         </section>
