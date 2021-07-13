@@ -66,7 +66,7 @@ class Home extends React.Component {
              </select>
              <label className="size">Drink size:</label>
              <select name="size" id="size" onChange={this.handleChange}>
-               <option name="size" value="S">Smail</option>
+               <option name="size" value="S">Small</option>
                <option name="size" value="M">Medium</option>
                <option name="size" value="L">Large</option>
              </select>

@@ -20,7 +20,7 @@ export default function Ticket(props){
       <p>Location: {props.branch}</p>
       <p>time: {new Date(props.created_at).toLocaleDateString()}</p>
       <p>Notes: {props.notes}</p>
-      <button onClick={()=>props.handleClaim(props.id,props.socketId)}>Claim</button>
+      <button onClick={()=>props.handleClaim(props.id,props.socketId,props.showModal)}>Claim</button>
     </article>
   )
 }
