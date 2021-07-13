@@ -16,16 +16,18 @@ class Admin extends React.Component {
     // run once when component is mounted
     const staffName = prompt("WHAT's your name?");
     this.setState({ staffName });
-    socket.on('connect', () => {
+    this.props.socket.on('connect', () => {
       //1a
-      socket.emit('join', { name: staffName });
-      socket.on('newTicket', (payload) => {
+      this.props.socket.emit('join', { name: staffName });
+      this.props.socket.emit('getAll');
+      this.props.socket.on('newTicket', (payload) => {
         this.setState({ tickets: [...this.state.tickets, payload] });
       });
-      socket.on('onlineStaff', (payload) => {
+      this.props.socket.on('onlineStaff', (payload) => {
         this.setState({ onlineStaff: [...this.state.onlineStaff, payload] });
       });
-      socket.on('offlineStaff', (payload) => {
+      this.props.socket.on('offlineStaff', (payload) => {
+        console.log('HELLO?', payload);
         this.setState({
           onlineStaff: this.state.onlineStaff.filter((staff) => staff.id !== payload.id),
         });
@@ -34,30 +36,34 @@ class Admin extends React.Component {
   }
   handleClaim = (id, socketId) => {
     console.log(socketId);
-    socket.emit('claim', { id, name: this.state.staffName, studentId: socketId });
+    this.props.socket.emit('claim', {
+      id,
+      name: this.state.staffName,
+      studentId: socketId,
+    });
+  
   };
   render() {
     return (
       <main className="admin-container">
-        <section id="container">
-          <h2>Opened Tickets</h2>
-          <section id="tickets">
-            {this.state.tickets.map((ticket) => {
-              return (
-                <Ticket {...ticket} handleClaim={this.handleClaim} key={ticket.id} />
-              );
-            })}
-          </section>
+      <section id="container">
+        <h2>Opened Tickets</h2>
+        <section id="tickets">
+          {this.state.tickets.map((ticket) => {
+            return (
+              <Ticket {...ticket} handleClaim={this.handleClaim} key={ticket.id} />
+            );
+          })}
         </section>
-        <aside id="online-staff">
-          <h2>Available TAs</h2>
-          {this.state.onlineStaff.map((staff) => (
-            <h2 key={staff.id}>{staff.name}</h2>
-          ))}
-        </aside>
-      </main>
+      </section>
+      <aside id="online-staff">
+        <h2>Available TAs</h2>
+        {this.state.onlineStaff.map((staff) => (
+          <h2 key={staff.id}>{staff.name}</h2>
+        ))}
+      </aside>
+    </main>
     );
   }
 }
-
 export default Admin;
