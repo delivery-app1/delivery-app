@@ -1,19 +1,21 @@
+import axios from 'axios';
 import React from 'react';
 import Ticket from './ticket';
 import FormModal from './modal';
 import './admin.css';
 import io from 'socket.io-client';
+const SERVER_URL = process.env.SERVER_URL || 'http://localhost:5000';
 const socket = io('localhost:5000/', { transports: ['websocket'] });
 class Admin extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       staffName: '',
-      tickets: [],
+      ordars: [],
       onlineStaff: [],
-      showModal:false,
-      done:0,
-      price: 0,      
+      showModal: false,
+      done: 0,
+      price: 0,
     };
   }
   componentDidMount() {
@@ -25,7 +27,8 @@ class Admin extends React.Component {
       this.props.socket.emit('join', { name: staffName });
       this.props.socket.emit('getAll');
       this.props.socket.on('newTicket', (payload) => {
-        this.setState({ tickets: [...this.state.tickets, payload] });
+        console.log('payload',payload)
+        this.setState({ ordars: payload });
       });
       this.props.socket.on('onlineStaff', (payload) => {
         this.setState({ onlineStaff: [...this.state.onlineStaff, payload] });
@@ -38,28 +41,28 @@ class Admin extends React.Component {
       });
     });
   }
-  handleShowModal=()=> {
+  handleShowModal = () => {
     this.setState({
-      showModal:true
+      showModal: true
     })
   }
-  handleCloseModal=()=> {
+  handleCloseModal = () => {
     this.setState({
-      showModal:false,
+      showModal: false,
     })
   }
-  updateTime=(event)=>{
+  updateTime = (event) => {
     this.setState({
       done: event.target.value,
     })
   }
-  updatePrice=(event)=>{
+  updatePrice = (event) => {
     this.setState({
       price: event.target.value
     })
     console.log('price from modal');
   }
-  answareOrder = async (event) =>{
+  answareOrder = async (event) => {
     event.preventDefault();
     const orderFormData = {
       done: this.state.done,
@@ -70,39 +73,51 @@ class Admin extends React.Component {
   handleClaim = (id, socketId) => {
     console.log(socketId);
     this.setState({
-     showModal: true
+      showModal: true
     });
-    console.log('ticket',this.state.staffName)
+    console.log('ticket', this.state.staffName)
     this.props.socket.emit('claim', {
       id,
       name: this.state.staffName,
-      studentId: socketId,
+      customerId: socketId,
     });
+
+
     
   };
+  deletee = async (id) => {
+    socket.emit('delete',id);
+    // const newData = await axios.delete(`${SERVER_URL}/deletOrder/${id}`);
+    // this.setState({
+    //   ordars: newData.data,
+    // });
+
+  }
   render() {
     return (
       <main className="admin-container">
-      <section id="container">
-        <h2>Opened Tickets</h2>
-        <section id="tickets">
-          {this.state.tickets.map((ticket) => {
-            return (
-  <>
-              <Ticket {...ticket} handleClaim={this.handleClaim} key={ticket.id} showModal={this.state.showModal} />
-              {this.state.showModal &&  <FormModal  closeModalFx={this.handleCloseModal} showModal={this.state.showModal} updateTime={this.updateTime} updatePrice={this.updatePrice} answareOrder={this.answareOrder} done={this.done} price={this.price}/>}
-              </>
-            );
-          })}
+        <section id="container">
+          <h2>Ordares</h2>
+          <section id="tickets">
+            {console.log('ordar', this.state.ordars)}
+            {this.state.ordars.map((ordar) => {
+              return (
+                <>
+
+                  <Ticket {...ordar} handleClaim={this.handleClaim} handleDelete={this.deletee} key={ordar._id} showModal={this.state.showModal} />
+                  {this.state.showModal && <FormModal closeModalFx={this.handleCloseModal} showModal={this.state.showModal} updateTime={this.updateTime} updatePrice={this.updatePrice} answareOrder={this.answareOrder} done={this.done} price={this.price} />}
+                </>
+              );
+            })}
+          </section>
         </section>
-      </section>
-      <aside id="online-staff">
-        <h2>Available TAs</h2>
-        {this.state.onlineStaff.map((staff) => (
-          <h2 key={staff.id}>{staff.name}</h2>
-        ))}
-      </aside>
-    </main>
+        <aside id="online-staff">
+          <h2>Delivery</h2>
+          {this.state.onlineStaff.map((staff) => (
+            <h2 key={staff.id}>{staff.name}</h2>
+          ))}
+        </aside>
+      </main>
     );
   }
 }
