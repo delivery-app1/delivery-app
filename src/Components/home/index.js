@@ -60,23 +60,9 @@ class Home extends React.Component {
         <main className="container">
           <section className="form-card">
 
-            <form id="order-form" onSubmit={this.handleSubmit}>
-              <p>Coffee Mnue</p>
-              <br></br>
-              <label >Notes</label>
-              <input
-                className="notes"
-                type="text"
-                name="notes"
-                placeholder="write your notes here..."
-                required
-                onChange={this.handleChange}
-              />
-              <br></br>
-              <label  >Coffee Menu</label>
-
-              <br></br>
-              <label className="size">Americano</label>
+            <form className="orderform" onSubmit={this.handleSubmit}>
+             <div id="order-form">
+              <label className="coffeeMenu">Americano</label>
               <input
                 type="checkbox"
                 name="coffee"
@@ -85,41 +71,42 @@ class Home extends React.Component {
                 onChange={this.handleChecked}
               />
 
-              <label className="size">Hot Coffee</label>
+              <label className="coffeeMenu">Hot Coffee</label>
               <input
                 type="checkbox"
                 name="coffee"
                 value="Hot Coffee"
                 onChange={this.handleChecked}
               />
-              <label className="size">Ice Coffee</label>
+              <label className="coffeeMenu">Ice Coffee</label>
               <input
                 type="checkbox"
                 name="Ice Coffee"
                 value="Ice Coffee"
                 onChange={this.handleChecked}
               />
-              <label className="size">Espresso</label>
+              <label className="coffeeMenu">Espresso</label>
               <input
                 type="checkbox"
                 name="Espresso"
                 value="Espresso"
                 onChange={this.handleChecked}
               />
-              <label className="size">Mocha</label>
+              <label className="coffeeMenu">Mocha</label>
               <input
                 type="checkbox"
                 name="Mocha"
                 value="Mocha"
                 onChange={this.handleChecked}
               />
-              <label className="size">Latte</label>
-              <input
+              <label className="coffeeMenu">Latte</label>
+              <input 
                 type="checkbox"
                 name="Latte"
                 value="Latte"
                 onChange={this.handleChecked}
               />
+              </div>
               <div className="size">
                 <label className="size">Drink size:</label>
                 <select name="size" id="size" onChange={this.handleChange}>
@@ -128,6 +115,10 @@ class Home extends React.Component {
                   <option name="size" value="L">Large</option>
                 </select>
               </div>
+              <br></br>
+
+              <div className="branch">
+              
               <label className="branch">
                 <input
                   type="radio"
@@ -156,6 +147,21 @@ class Home extends React.Component {
                 />
                 Irbid City-Center
               </label>
+              </div>
+              <div className="notes">
+              <label className="notes">Notes
+              </label>
+              <input
+                className="notes"
+                type="text"
+                name="notes"
+                placeholder="write your notes here..."
+                required
+                onChange={this.handleChange}
+              />
+                </div> 
+              
+              <br></br>
               <button className="order">submit</button>
             </form>
           </section>

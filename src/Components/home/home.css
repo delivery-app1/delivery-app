@@ -1,47 +1,108 @@
  
  .container {
-  min-height: 100vh;
+  /* min-height: 100vh;
   background-size: contain;
   background-image: url(./coffee.jpg);
   background-image: cover;
   background-repeat:no-repeat ;
-  display: flex;
+  display: flex; */
   align-items: center;
   justify-content: center;
-  height: 100%;
-  width: 100% ;
+  height: 80%;
+  width: 35% ;
 } 
 .form-card {
   margin: 100px;
-  background-image: url(./s.jpg);
+  background-image: url(./coffee-shop1.jpg);
   background-repeat: no-repeat;
   background-size: cover;
-  box-shadow: 2px 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
-  padding: 16px;
+  /* box-shadow: 2px 4px 8px 0 rgba(0, 0, 0, 0.2); this adds the "card" effect */
+  padding: 10px;
   text-align: center;
   background-color: #f1f1f1;
   border-radius: 10px;
   color: aliceblue;
-  width: 600px;
-  height: 550px;
+  width: 70%;
+  height: 70%;
+  /* box-shadow: 5px 10px #888888;} */
 }
 #order-form {
   display: grid;
   gap: 20px;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 2fr);
   grid-auto-rows: 30px;
+  padding-top: 27%;
 }
 
-.coffee {
+.coffeeMenu {
+  margin-left: 30px;
   grid-column-start: 1;
-  grid-column-end: 6;
+  grid-column-end: 4;
+  font-size: 23px;
+  background-color: rgba(255, 248, 220, 0.116);
+  
 }
+.coffeeMenu:hover{
+  background-color: rgba(255, 248, 220, 0.349);
+}
+
+
+
 .size {
-  grid-column-start: 1;
-  grid-column-end: 3;
+  /* grid-column-start: 1;
+  grid-column-end: 3; */
+  display: block;
+  padding-left: 17px;
+  padding-top: 15px;
+  float: left;
+  margin-bottom: 10px;
+
 }
-.branch {
-  display:block ;
-  grid-column-start: 3;
-  grid-column-end: 3;
+
+.size label{
+  display: inline-block;
+  padding-right: 15px;
+  font-size: 20px;
+  
+}
+.size select{
+  height: 30px;
+  width: 90px;
+  font-size: 12px;
+  margin-top: 17px;
+
+}
+.size select:hover{
+  box-shadow: rgb(77, 74, 63);
+  box-sizing: 50px;
+}
+ .branch {
+  
+  /* grid-column-start: 3;
+  grid-column-end: 3; */
+  /* padding: 10px;
+  font-size: 20px;
+  margin-top: 25px; */
+  padding-left: 15px;
+  padding-top: 5px;
+
+}
+
+.notes{
+/* padding-top: 20px;
+padding-bottom: 25px;
+width: 150px; */
+
+}
+.notes label{
+  width: 20%;
+  height: 20px;
+  float: left;
+ 
+}
+.notes input{
+  width:50%;
+  height: 40px;
+  display:block;
+  float: right;
 }
