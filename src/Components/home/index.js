@@ -2,6 +2,7 @@ import React from 'react';
 import './home.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import io from 'socket.io-client';
+import Button from 'react-bootstrap/Button';
 const SERVER_URL = process.env.SERVER_URL || 'localhost:5000/';
 const socket = io(SERVER_URL, { transports: ['websocket'] });
 
@@ -149,10 +150,9 @@ class Home extends React.Component {
               </label>
               </div>
               <div className="notes">
-              <label className="notes">Notes
-              </label>
+             
               <input
-                className="notes"
+                id="notesInput"
                 type="text"
                 name="notes"
                 placeholder="write your notes here..."
@@ -162,7 +162,8 @@ class Home extends React.Component {
                 </div> 
               
               <br></br>
-              <button className="order">submit</button>
+              <Button type="submit" className="submitOrder" style={{width:"100px"}} variant="light">Order</Button>
+              {/* <button className="order">submit</button> */}
             </form>
           </section>
         </main>

@@ -4,6 +4,8 @@ import Ticket from './ticket';
 import FormModal from './modal';
 import './admin.css';
 import io from 'socket.io-client';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Spinner from 'react-bootstrap/Spinner';
 const SERVER_URL = process.env.SERVER_URL || 'http://localhost:5000';
 const socket = io('localhost:5000/', { transports: ['websocket'] });
 class Admin extends React.Component {
@@ -87,17 +89,12 @@ class Admin extends React.Component {
   };
   deletee = async (id) => {
     socket.emit('delete',id);
-    // const newData = await axios.delete(`${SERVER_URL}/deletOrder/${id}`);
-    // this.setState({
-    //   ordars: newData.data,
-    // });
-
+ 
   }
   render() {
     return (
       <main className="admin-container">
         <section id="container">
-          <h2>Ordares</h2>
           <section id="tickets">
             {console.log('ordar', this.state.ordars)}
             {this.state.ordars.map((ordar) => {
@@ -112,9 +109,12 @@ class Admin extends React.Component {
           </section>
         </section>
         <aside id="online-staff">
-          <h2>Delivery</h2>
+          <h2>Staff</h2>
           {this.state.onlineStaff.map((staff) => (
-            <h2 key={staff.id}>{staff.name}</h2>
+            <div>
+            <Spinner animation="grow" variant="success" />
+            <span className="span" key={staff.id}>{staff.name}</span>
+          </div>
           ))}
         </aside>
       </main>
