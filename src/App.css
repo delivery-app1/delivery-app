@@ -3,11 +3,12 @@
   box-sizing: border-box;
 }
 body {
-  background-color: lightgray;
+  background-image: url(https://images.pexels.com/photos/207142/pexels-photo-207142.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
+  /* background-color: lightgray;
   margin: 0 auto;
-  max-width: 1440px;
+  max-width: 1440px; */
 }
-header {
+/* header {
   background: deepskyblue;
   width: 100%;
 }
@@ -25,4 +26,4 @@ header nav ul li:first-child {
 header nav ul li a {
   color: white;
   text-decoration: none;
-}
+} */
