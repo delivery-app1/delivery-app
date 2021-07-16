@@ -88,21 +88,29 @@
 
 }
 
-.notes{
-/* padding-top: 20px;
+/*.notes{
+ padding-top: 20px;
 padding-bottom: 25px;
-width: 150px; */
+width: 150px; 
 
+}*/
+
+#notesInput {
+  width:  85%;
+  height: 45px;
+  margin-top:20px;
+  margin: auto;
+  text-align: center;
 }
+
 .notes label{
   width: 20%;
   height: 20px;
   float: left;
  
 }
-.notes input{
-  width:50%;
-  height: 40px;
-  display:block;
-  float: right;
+
+.submitOrder:hover{
+  background-color: rgb(207, 42, 36);
+  
 }
