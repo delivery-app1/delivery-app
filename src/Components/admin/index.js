@@ -6,8 +6,8 @@ import './admin.css';
 import io from 'socket.io-client';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Spinner from 'react-bootstrap/Spinner';
-const SERVER_URL = process.env.SERVER_URL || 'http://localhost:5000';
-const socket = io('localhost:5000/', { transports: ['websocket'] });
+const SERVER_URL = process.env.REACT_APP_SERVER_URL || 'https://b-delivery-app.herokuapp.com/';
+const socket = io(SERVER_URL, { transports: ['websocket'] });
 class Admin extends React.Component {
   constructor(props) {
     super(props);

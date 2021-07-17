@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import Home from '../home';
 import Admin from '../admin';
 import io from 'socket.io-client';
-const SERVER_URL = process.env.SERVER_URL || 'localhost:5000/';
+const SERVER_URL = process.env.REACT_APP_SERVER_URL || 'https://b-delivery-app.herokuapp.com/';
 const socket = io(SERVER_URL, { transports: ['websocket'] });
 function Main(props) {
   return (
