@@ -18,6 +18,8 @@ class Admin extends React.Component {
       showModal: false,
       done: 0,
       price: 0,
+      socketId:0,
+      id:0,
     };
   }
   componentDidMount() {
@@ -43,10 +45,14 @@ class Admin extends React.Component {
       });
     });
   }
-  handleShowModal = () => {
+  handleShowModal = (id, socketId) => {
     this.setState({
-      showModal: true
+      showModal: true,
+      id:id,
+      socketId: socketId,
+
     })
+    // console.log('from handle showmodel',id,socketId)
   }
   handleCloseModal = () => {
     this.setState({
@@ -62,31 +68,45 @@ class Admin extends React.Component {
     this.setState({
       price: event.target.value
     })
-    console.log('price from modal');
+    console.log('price from modal',event.target.value);
   }
-  answareOrder = async (event) => {
-    event.preventDefault();
-    const orderFormData = {
-      done: this.state.done,
-      price: this.state.price,
-    }
-    console.log(orderFormData)
-  }
-  handleClaim = (id, socketId) => {
-    console.log(socketId);
-    this.setState({
-      showModal: true
-    });
-    console.log('ticket', this.state.staffName)
-    this.props.socket.emit('claim', {
-      id,
-      name: this.state.staffName,
-      customerId: socketId,
-    });
-
-
-    
+  // answareOrder = async (event) => {
+  //   event.preventDefault();
+  //   const orderFormData = {
+  //     done: this.state.done,
+  //     price: this.state.price,
+  //   }
+  //   console.log(orderFormData)
+  // }
+answareOrder = async (event) => {
+      event.preventDefault();
+  this.props.socket.emit('claim', {
+       id:this.state.id,
+        name: this.state.staffName,
+        customerId:this.state.socketId,
+        done: this.state.done,
+        price: this.state.price,
+      });  
   };
+
+
+
+  // handleClaim = (id, socketId) => {
+  //   console.log(socketId);
+    // this.setState({
+    //   showModal: true
+    // });
+   // the previos
+  //   console.log('ticket', this.state.staffName)
+  //   this.props.socket.emit('claim', {
+  //     id,
+  //     name: this.state.staffName,
+  //     customerId: socketId,
+  //   });  
+  // };
+
+
+  
   deletee = async (id) => {
     socket.emit('delete',id);
  
@@ -100,9 +120,8 @@ class Admin extends React.Component {
             {this.state.ordars.map((ordar) => {
               return (
                 <>
-
-                  <Ticket {...ordar} handleClaim={this.handleClaim} handleDelete={this.deletee} key={ordar._id} showModal={this.state.showModal} />
-                  {this.state.showModal && <FormModal closeModalFx={this.handleCloseModal} showModal={this.state.showModal} updateTime={this.updateTime} updatePrice={this.updatePrice} answareOrder={this.answareOrder} done={this.done} price={this.price} />}
+                  <Ticket {...ordar} handleDelete={this.deletee} key={ordar._id}  handleShowModal={this.handleShowModal}  />
+                  {this.state.showModal && <FormModal   closeModalFx={this.handleCloseModal} showModal={this.state.showModal} updateTime={this.updateTime} updatePrice={this.updatePrice} answareOrder={this.answareOrder} done={this.done} price={this.price} handleClaim={this.handleClaim} />}
                 </>
               );
             })}

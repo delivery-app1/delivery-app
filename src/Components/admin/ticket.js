@@ -41,7 +41,7 @@ export default function Ticket(props) {
         <ListGroupItem  style={{borderColor:"#4d4d4d",backgroundColor:"#0d0d0d", color:"white" , overflow:'auto', height:"5rem" }}>Notes: {props.notes}</ListGroupItem>
       </ListGroup>
       <Card.Body>
-      <Button type="submit"  style={{marginLeft:"30px"}} variant="light" onClick={()=>props.handleClaim(props._id,props.socketId)}>Confirmed</Button>
+      <Button type="submit"  style={{marginLeft:"30px"}} variant="light" onClick={()=>props.handleShowModal(props._id,props.socketId)}>Confirmed</Button>
       <Button type="submit"  style={{margin :"10px"}} variant="light" onClick={()=>props.handleDelete(props._id)}>Delete</Button>
       {/* <button onClick={()=>props.handleClaim(props._id,props.socketId)}>Claim</button> */}
       {/* <button onClick={()=>props.handleDelete(props._id)}>Delete</button> */}

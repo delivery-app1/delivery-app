@@ -19,7 +19,7 @@ class Home extends React.Component {
     this.setState({ customerName });
     this.props.socket.on('connect', () => {
       this.props.socket.on('claimed', function (payload) {
-        alert(`${payload.name} claimed your ordar`);
+        alert(`${payload.name} claimed your ordar in ${payload.done} minuts and the price will be: ${payload.price}`);
       });
     });
   }
