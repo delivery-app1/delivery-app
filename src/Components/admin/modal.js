@@ -10,17 +10,17 @@ export class FormModal extends Component {
             <div>
                 <Modal show={this.props.showModal} onHide={this.props.closeModalFx}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Order Inf</Modal.Title>
+                        <Modal.Title>Confirme Order</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <Form onSubmit={this.props.answareOrder}>
                             <Form.Group controlId="formBasicEmail">
-                                <Form.Label>Order will bwe ready after:</Form.Label>
-                                <Form.Control type="text" placeholder="done " name="done" onChange={this.props.updateTime} />
+                                <Form.Label>Order will be ready after:</Form.Label>
+                                <Form.Control type="text" placeholder="Time " name="Time" onChange={this.props.updateTime} />
                             </Form.Group>
                             <Form.Group controlId="formBasicPassword">
                                 <Form.Label>price</Form.Label>
-                                <Form.Control type="text" placeholder="price" name="price" onChange={this.props.updatePrice}/>
+                                <Form.Control type="text" placeholder="Price" name="Price" onChange={this.props.updatePrice}/>
                             </Form.Group>
                             <Button variant="primary" type="submit">
                                 submit answare
