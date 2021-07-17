@@ -3,7 +3,7 @@ import './home.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import io from 'socket.io-client';
 import Button from 'react-bootstrap/Button';
-const SERVER_URL = process.env.SERVER_URL || 'localhost:5000/';
+const SERVER_URL = process.env.REACT_APP_SERVER_URL || 'https://b-delivery-app.herokuapp.com/';
 const socket = io(SERVER_URL, { transports: ['websocket'] });
 // import Alert from "react-bootstrap/Alert";
 
