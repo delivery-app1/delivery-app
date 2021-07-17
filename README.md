@@ -18,14 +18,14 @@ all the orders would be saved and the employees delete it.
 #### for deploying : Netlify, Heroku
 
 
-### Done by:
+## Authors:
 
 
 - **Baraa'h Alomari**
 - **Batool Ayyad**
 
 
-### Links:
+## Links:
 
 
 - **Netlify**: [delivery-app-bb](https://delivery-app-bb.netlify.app/)
@@ -33,3 +33,12 @@ all the orders would be saved and the employees delete it.
 
 - **Heroku**: [b-delivery-app](https://b-delivery-app.herokuapp.com/)
 
+
+- **organization:** [delivery-app1](https://github.com/delivery-app1)
+
+
+
+
+## UML:
+
+![UMLProject](./UMLProject.PNG)
