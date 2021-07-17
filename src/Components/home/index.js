@@ -142,15 +142,7 @@ class Home extends React.Component {
                 />
                 Amman Mecca-Mall
               </label>
-              <label className="branch">
-                <input
-                  type="radio"
-                  name="branch"
-                  value="Irbid City-Center"
-                  onChange={this.handleChange}
-                />
-                Irbid City-Center
-              </label>
+                          
               </div>
               <div className="notes">
              
