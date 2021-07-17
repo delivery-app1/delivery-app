@@ -5,6 +5,8 @@ import io from 'socket.io-client';
 import Button from 'react-bootstrap/Button';
 const SERVER_URL = process.env.SERVER_URL || 'localhost:5000/';
 const socket = io(SERVER_URL, { transports: ['websocket'] });
+// import Alert from "react-bootstrap/Alert";
+
 
 class Home extends React.Component {
   constructor(props) {
@@ -15,11 +17,11 @@ class Home extends React.Component {
     };
   }
   componentDidMount() {
-    const customerName = prompt("WHAT's your name?");
+    const customerName = prompt("Enter your name:");
     this.setState({ customerName });
     this.props.socket.on('connect', () => {
       this.props.socket.on('claimed', function (payload) {
-        alert(`${payload.name} claimed your ordar in ${payload.done} minuts and the price will be: ${payload.price}`);
+        alert(`${payload.name} Confirme your ordar \n Your order will be ready after: ${payload.done} minuts \n  price: ${payload.price} JD`);
       });
     });
   }
@@ -58,6 +60,7 @@ class Home extends React.Component {
   render() {
     return (
       <>
+      <h2>Welcome {this.state.customerName}</h2>
         <main className="container">
           <section className="form-card">
 

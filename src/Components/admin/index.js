@@ -24,7 +24,7 @@ class Admin extends React.Component {
   }
   componentDidMount() {
     // run once when component is mounted
-    const staffName = prompt("WHAT's your name?");
+    const staffName = prompt("Employee name:");
     this.setState({ staffName });
     this.props.socket.on('connect', () => {
       //1a
@@ -38,7 +38,7 @@ class Admin extends React.Component {
         this.setState({ onlineStaff: [...this.state.onlineStaff, payload] });
       });
       this.props.socket.on('offlineStaff', (payload) => {
-        console.log('HELLO?', payload);
+        console.log('pay load from onlinstaff', payload);
         this.setState({
           onlineStaff: this.state.onlineStaff.filter((staff) => staff.id !== payload.id),
         });
@@ -68,7 +68,7 @@ class Admin extends React.Component {
     this.setState({
       price: event.target.value
     })
-    console.log('price from modal',event.target.value);
+    // console.log('price from modal',event.target.value);
   }
   // answareOrder = async (event) => {
   //   event.preventDefault();
